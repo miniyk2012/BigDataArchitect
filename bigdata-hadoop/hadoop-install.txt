@@ -398,10 +398,11 @@ fs.defaultFs -> hdfs://node01:9000
 		<property>
 		  <name>dfs.ha.fencing.methods</name>
 		  <value>sshfence</value>
+		  <value>shell(true)</value>
 		</property>
 		<property>
 		  <name>dfs.ha.fencing.ssh.private-key-files</name>
-		  <value>/root/.ssh/id_dsa</value>
+		  <value>/home/miniyk/.ssh/id_rsa</value>
 		</property>
 		
 		#开启自动化： 启动zkfc
@@ -480,12 +481,12 @@ fs.defaultFs -> hdfs://node01:9000
 	5）分发配置
 		给每一台都分发
 	6）初始化：
-		1）先启动JN   hadoop-daemon.sh start journalnode 
-		2）选择一个NN 做格式化：hdfs namenode -format   <只有第一次搭建做，以后不用做>
-		3)启动这个格式化的NN ，以备另外一台同步  hadoop-daemon.sh start namenode 
-		4)在另外一台机器中： hdfs namenode -bootstrapStandby
-		5)格式化zk：   hdfs zkfc  -formatZK     <只有第一次搭建做，以后不用做>
-		6) start-dfs.sh	
+		1）node01,node02,node03分别启动JN:   hadoop-daemon.sh start journalnode 
+		2）选择一个NN(node01) 做格式化：hdfs namenode -format   <只有第一次搭建做，以后不用做>
+		3)启动这个格式化的NN(node01) ，以备另外一台同步  hadoop-daemon.sh start namenode 
+		4)在另外一台NN(node02)中： hdfs namenode -bootstrapStandby
+		5)格式化zk(在node01执行)：   hdfs zkfc  -formatZK     <只有第一次搭建做，以后不用做>
+		6) node01执行: start-dfs.sh	
 使用验证：
 	1）去看jn的日志和目录变化：
 	2）node04
