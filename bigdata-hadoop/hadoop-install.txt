@@ -520,7 +520,7 @@ hdfs是一个文件系统
 	
 	hdfs没有相关命令和接口去创建用户
 		信任客户端 <- 默认情况使用的 操作系统提供的用户
-				扩展 kerberos LDAP  继承第三方用户认证系统
+				扩展 kerberos LDAP  集成第三方用户认证系统
 	有超级用户的概念
 		linux系统中超级用户：root
 		hdfs系统中超级用户： 是namenode进程的启动用户
@@ -587,7 +587,7 @@ hdfs是一个文件系统
 				good:        <因为hdfs已经启动了，不知道你操作系统又偷偷摸摸创建了用户和组
 	*node01:
 		root:
-			useradd good
+			adduser good
 			groupadd ooxx
 			usermod -a -G ooxx good
 		su god 
